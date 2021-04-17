@@ -172,15 +172,19 @@ Page({
                 console.log("图片临时网址，小程序关闭后将会被销毁：");
                 console.log(filePath)
                 wx.uploadFile({
-                    url: 'https://sm.ms/api/upload',//图床URL
+                    // url: 'https://sm.ms/api/upload',//图床URL
+                    url: 'http://10.122.233.152/php_server/upload_img.php',
                     filePath: filePath,
                     name: 'smfile',
+                    formData:{
+                        'user':'test'
+                    },
                     success: res => {
                       //逆向转换JSON字符串后抽取网址
                       console.log("图片上传成功！")
-                      console.log(res)
-                      console.log("test")
-                      console.log(JSON.parse(res.data).data.url)
+                    //   console.log(res)
+                      var data=JSON.parse(res.data)
+                      console.log(data)
                     }
                 })
             }
