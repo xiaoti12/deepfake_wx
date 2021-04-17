@@ -157,12 +157,13 @@ Page({
         })
     },
     choseImg() {
+        var that = this
         if (this.data.loading) return
         wx.chooseImage({
             count: 1,
             success: res=>{
                 var filePath = res.tempFilePaths[0];
-                this.setData({
+                that.setData({
                 img: res.tempFilePaths[0],
                 modelData: {
                     src1: filePath
@@ -173,10 +174,12 @@ Page({
                 wx.uploadFile({
                     url: 'https://sm.ms/api/upload',//图床URL
                     filePath: filePath,
-                    name: 'origin',
+                    name: 'smfile',
                     success: res => {
                       //逆向转换JSON字符串后抽取网址
                       console.log("图片上传成功！")
+                      console.log(res)
+                      console.log("test")
                       console.log(JSON.parse(res.data).data.url)
                     }
                 })
