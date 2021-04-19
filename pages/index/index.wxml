@@ -57,8 +57,10 @@
                 <checkbox-group bindchange="checkboxChange">
                 <view class='check'>
                     <label wx:for="{{else.items}}" wx:key="{{item.value}}">
+                    <view class="checkchild">
                         <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
-                       {{item.name}}
+                       <text>{{item.name}}</text>
+                       </view>
                     </label>
                 </view>
                 </checkbox-group>

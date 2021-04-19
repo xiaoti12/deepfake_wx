@@ -136,6 +136,11 @@ page{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .check{
-    padding: 20rpx;
     width: 600rpx;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+.checkchlid{
+    width: 200rpx;
 }
