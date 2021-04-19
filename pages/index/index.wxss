@@ -39,7 +39,7 @@ page{
 }
 .btn-wrap .btn{
     flex-shrink: 0;
-    margin: 0 10rpx;
+    margin: 0 20rpx;
     color: white;
 }
 .btn-wrap .btn1{
@@ -50,6 +50,9 @@ page{
 }
 .btn-wrap .btn3{
     background: #909399;
+}
+.btn-wrap .btn4{
+    background: #109399;
 }
 
 .mode-list{
@@ -89,7 +92,7 @@ page{
 }
 .setting-cont{
     width: 100%;
-    height: 560rpx;
+    height: 1000rpx;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -105,7 +108,7 @@ page{
     margin: 0;
 }
 .setting-list{
-    margin-top: 20rpx;
+    margin-top: 10rpx;
 }
 .setting-list-item{
     padding: 20rpx 40rpx;
@@ -114,9 +117,25 @@ page{
 }
 .slider-label{
     flex: 0 0 120rpx;
-    font-size: 26rpx;
+    font-size: 36rpx;
     text-align: right;
 }
 .slider-item{
     flex: 1;
+}
+.clickbutton{
+    background:#2d8cf0;
+    color:white;
+  }
+  .clickbutton2{
+    color: #888888;
+  }
+  
+.radiotext{
+    font-size: 32rpx;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.check{
+    padding: 20rpx;
+    width: 600rpx;
 }

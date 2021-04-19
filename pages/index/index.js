@@ -20,88 +20,89 @@ Page({
         mode: [{
             value: 'origin',
             name: '原图',
-            configKey: ['hair','sex'],
-            config: {
-                hair: {
-                    name: '头发黑度',
-                    value: 1,
-                    max: 2,
-                    min: 0,
-                    step: 1
-                },
-                sex: {
-                    name: '性别',
-                    value: '1',
-                    max: 2,
-                    min: 1,
-                    step:1
-                }
-            }
         },
         {
             value: 'adv',
             name: '处理后',
-            configKey: ['hair','sex'],
-            config: {
-                hair: {
-                    name: '头发黑度',
-                    value: 1,
-                    max: 2,
-                    min: 0,
-                    step: 1
-                },
-                sex: {
-                    name: '性别',
-                    value: '1',
-                    max: 2,
-                    min: 1,
-                    step:1
-                }
-            }
         },
         {
             value: 'deepfake',
             name: 'fake',
-            configKey: ['hair','sex'],
-            config: {
-                hair: {
-                    name: '头发黑度',
-                    value: 1,
-                    max: 2,
-                    min: 0,
-                    step: 1
-                },
-                sex: {
-                    name: '性别',
-                    value: '1',
-                    max: 2,
-                    min: 1,
-                    step:1
-                }
-            }
         },
         {
             value: 'adv_fake',
             name: '处理后fake',
-            configKey: ['hair','sex'],
+        },
+        ],
+        else:{
+            name:'其余特征:',
+            items:[
+                {name:'有眼镜',value:'glasses'},
+                {name:'小眼睛',value:'seye'},
+                {name:'浓妆',value:'makeup'},
+                {name:'鹅蛋脸',value:'egg'},
+                {name:'微笑',value:'smile'},
+                {name:'张嘴',value:'openm'},
+                {name:'年轻',value:'young'},
+                {name:'鬓角',value:'bj'},
+
+            ]
+        },
+        configKey: ['hair','hcolor','hstyle','sex','beard','target'],
             config: {
-                hair: {
-                    name: '头发黑度',
-                    value: 1,
-                    max: 2,
-                    min: 0,
-                    step: 1
+                hair:{
+                    name:'头发： ',
+                    show:true,
+                    items:[
+                        {name:'有头发',value:'YES'},
+                        {name:'没有头发',value:'NO',checked: 'true'},
+                    ]
+                },
+                beard:{
+                    name:'胡须： ',
+                    show:true,
+                    items:[
+                        {name:'小胡子',value:'xhz'},
+                        {name:'短胡须',value:'dhx'},
+                        {name:'无胡须',value:'whx'},
+                    ]
+                },
+                hcolor: {
+                    name: '发色： ',
+                    show:false,
+                    items:[
+                        {name: '黑发', value: 'Black'},
+                        {name: '棕发', value: 'Brown', checked: 'true'},
+                        {name: '金发', value: 'Blond'},
+                    ]
+                },
+                hstyle:{
+                    name:'发型： ',
+                    show:false,
+                    items:[
+                        {name:'直发',value:'straight',checked:'true'},
+                        {name:'卷发',value:'curly'}
+                    ]
                 },
                 sex: {
-                    name: '性别',
-                    value: '1',
-                    max: 2,
-                    min: 1,
-                    step:1
+                    name: '性别： ',
+                    show:true,
+                    items:[
+                        {name: '男性', value: 'Male'},
+                        {name: '女性', value: 'Female', checked: 'true'},
+                    ]
+                },
+                target:{
+                    name:'目标： ',
+                    show:true,
+                    items:[
+                        {name: '黑发',value: 'Black',checked :'true'},
+                        {name: '金发',value: 'Brown'},
+                        {name: '棕发',value: 'Brown'},
+                        {name: '男性',value: 'Male'},
+                    ]
                 }
             }
-        }
-    ]
     },
 
     onLoad: function () {
@@ -257,7 +258,6 @@ Page({
                     },
                     fail: failFun
                 })
-                console.log(2)
 
             },
             fail: failFun
@@ -312,6 +312,42 @@ Page({
     openIndex1(){
         wx.navigateTo({
             url: '/pages/index1/index',
+        })
+    },
+    radioChange: function(e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value)
+        if(e.detail.value=='YES')
+        {
+            this.setData({
+                ['config.hcolor.show']:true,
+                ['config.hstyle.show']:true,
+            })
+        }
+        else if(e.detail.value=='NO')
+        {
+            this.setData({
+                ['config.hcolor.show']:false,
+                ['config.hstyle.show']:false,
+            })
+        }
+      },
+      checkboxChange(e) {
+        console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    
+        const items = this.data.else
+        const values = e.detail.value
+        for (let i = 0, lenI = items.length; i < lenI; ++i) {
+          items[i].checked = false
+    
+          for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
+            if (items[i].value === values[j]) {
+              items[i].checked = true
+              break
+            }
+          }
+        }
+        this.setData({
+          items
         })
     },
 })
