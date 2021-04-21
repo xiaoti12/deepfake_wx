@@ -1,30 +1,37 @@
 const tools = {
     //原图
-    origin: function (data, config, width, height) {
+    origin: function (imgL) {
+        console.log(imgL[0])
         
-        return data
+        return imgL[0]
     },
     //处理
-    adv: function (data, config, width, height) {
-        
-        return data
+    adv: function (imgL) {
+        console.log(imgL[1])
+        return imgL[1]
     },
     //fake
-    deepfake: function (data, config, width, height) {
-        
-        return data
+    deepfake: function (imgL) {
+        console.log(imgL[2])
+        return imgL[2]
     },
     //处理后fake
-    adv_fake: function (data, config, width, height) {
-       
-        return data
+    adv_fake: function (imgL) {
+        console.log(imgL[3])
+        return imgL[3]
     },
 }
 
 
-module.exports.tool = function (data, config, imgInfo){
+module.exports.tool = function (img, config, imgInfo,imgL){
     const name = config.value || 'statue'
     const width = imgInfo.width
     const height = imgInfo.height
-    return tools[name](data, config, width, height)
+     
+    // imgL[0]=data.data[0]
+    // imgL[1]=data.data[1]
+    // imgL[2]=data.data[2]
+    // imgL[3]=data.data[3]
+
+    return tools[name](imgL)
 }

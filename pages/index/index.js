@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
-const tool = require('./tool.js').tool
+
+const tool = require('./tool.js').tool 
 const app = getApp();
 let ctx;
 
@@ -12,11 +13,14 @@ Page({
         loading: false,
         hasUserInfo: true,
         userimg: '/img/wechat.png',
+        imgL:[],
         // userimgInfo: {},
         
         openModeSetting: false,
         modeIndex: 0,
-        modeConfig: {},
+        modeConfig: {
+            value: 'origin',
+            name: '原图',},
         mode: [{
             value: 'origin',
             name: '原图',
@@ -64,7 +68,7 @@ Page({
                     items:[
                         {name:'小胡子',value:'xhz'},
                         {name:'短胡须',value:'dhx'},
-                        {name:'无胡须',value:'whx'},
+                        {name:'无胡须',value:'whx', checked: 'true'},
                     ]
                 },
                 hcolor: {
@@ -166,28 +170,10 @@ Page({
                 var filePath = res.tempFilePaths[0];
                 that.setData({
                 img: res.tempFilePaths[0],
-                modelData: {
-                    src1: filePath
-                }
                 })
                 console.log("图片临时网址，小程序关闭后将会被销毁：");
                 console.log(filePath)
-                wx.uploadFile({
-                    // url: 'https://sm.ms/api/upload',//图床URL
-                    url: 'http://10.122.233.152/php_server/upload_img.php',
-                    filePath: filePath,
-                    name: 'smfile',
-                    formData:{
-                        'user':'test'
-                    },
-                    success: res => {
-                      //逆向转换JSON字符串后抽取网址
-                      console.log("图片上传成功！")
-                    //   console.log(res)
-                      var data=JSON.parse(res.data)
-                      console.log(data)
-                    }
-                })
+                this.submit()
             }
         })
     },
@@ -230,8 +216,9 @@ Page({
                 canvasId: 'myCanvas',
                 quality: 1,
                 success: res => {
+                    var data = tool(this.data.img, modeConfig, imgInfo,this.data.imgL)
                     this.setData({
-                        showImg: res.tempFilePath
+                        showImg: data
                     })
                 },
                 complete: failFun
@@ -244,11 +231,9 @@ Page({
             width: width, 
             height: height,
             success: res=>{
-                var data = tool(res.data, modeConfig, imgInfo)
-
                 wx.canvasPutImageData({
                     canvasId: 'myCanvas',
-                    data: data,
+                    data: res.data,
                     x: 0,
                     y: 0,
                     width: width,
@@ -271,6 +256,43 @@ Page({
         })
         wx.nextTick(() => {
             this.imgLoad()
+        })
+    },
+    submit(){
+        const id=''
+        const index = this.data.modeIndex
+        const modeConfig=this.data.modeConfig
+        wx.uploadFile({ 
+            // url: 'https://sm.ms/api/upload',//图床URL 
+            url: 'http://10.122.233.152/php_server/upload_img.php', 
+            filePath: this.data.img, 
+            name: 'smfile', 
+            formData:{ 
+                'user':'test' 
+            }, 
+            success: res => { 
+              //逆向转换JSON字符串后抽取网址 ]\
+              console.log(res)
+              console.log("图片上传成功！") 
+              var data=JSON.parse(res.data) 
+            //   console.log(data)
+              id:res.message
+            } 
+        })
+        wx.request({ 
+            url: 'http://10.122.233.152/php_server/form.php', 
+            header: { 
+            "Content-Type": "application/x-www-form-urlencoded" },
+            method: "POST",
+            data:{name:id,data:index},
+            success: res=> {
+                console.log(res)
+                console.log(res.data.data)
+                // var data=JSON.parse(res.data) 
+                    this.setData({
+                        imgL:res.data.data
+                    })
+            }
         })
     },
     // 打开设置参数
@@ -305,9 +327,11 @@ Page({
             [`mode[${index}]`]: modeConfig,
             openModeSetting: false
         })
+        this.submit()
         wx.nextTick(() => {
             this.imgLoad()
         })
+
     },
     openIndex1(){
         wx.navigateTo({
