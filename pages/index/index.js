@@ -10,6 +10,7 @@ Page({
         img: '',
         showImg: '',
         imgInfo: {},
+        id:'',
         loading: false,
         hasUserInfo: true,
         userimg: '/img/wechat.png',
@@ -100,10 +101,10 @@ Page({
                     name:'目标： ',
                     show:true,
                     items:[
-                        {name: '黑发',value: 'Black',checked :'true'},
-                        {name: '金发',value: 'Brown'},
-                        {name: '棕发',value: 'Brown'},
-                        {name: '男性',value: 'Male'},
+                        {name: '黑发',value: 'TBlack',checked :'true'},
+                        {name: '金发',value: 'TBlond'},
+                        {name: '棕发',value: 'TBrown'},
+                        {name: '男性',value: 'TMale'},
                     ]
                 }
             }
@@ -173,7 +174,7 @@ Page({
                 })
                 console.log("图片临时网址，小程序关闭后将会被销毁：");
                 console.log(filePath)
-                this.submit()
+                this.openModeConfig()
             }
         })
     },
@@ -259,9 +260,10 @@ Page({
         })
     },
     submit(){
-        const id=''
+        // const id=''
         const index = this.data.modeIndex
         const modeConfig=this.data.modeConfig
+        // console.log(that.data.modeConfig)
         wx.uploadFile({ 
             // url: 'https://sm.ms/api/upload',//图床URL 
             url: 'http://10.122.233.152/php_server/upload_img.php', 
@@ -276,17 +278,31 @@ Page({
               console.log("图片上传成功！") 
               var data=JSON.parse(res.data) 
             //   console.log(data)
-              id:res.message
+            //   id:res.data.message
+                // id:res.message
+                // var id=data.data
+                this.setData({
+                    id:data.data
+                })
+                this.submitForm()
             } 
         })
+        
+    },
+    submitForm(){
+        // console.log(this.data.else)
         wx.request({ 
             url: 'http://10.122.233.152/php_server/form.php', 
-            header: { 
-            "Content-Type": "application/x-www-form-urlencoded" },
             method: "POST",
-            data:{name:id,data:index},
+            data:{
+                name:this.data.id,
+                config:JSON.stringify(this.data.config),
+                else:JSON.stringify(this.data.else)
+            },
+            header: { 
+            "Content-Type": "application/x-www-form-urlencoded"
+            },
             success: res=> {
-                console.log(res)
                 console.log(res.data.data)
                 // var data=JSON.parse(res.data) 
                     this.setData({
@@ -355,15 +371,16 @@ Page({
             })
         }
       },
-      checkboxChange(e) {
+    checkboxChange(e) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    
-        const items = this.data.else
-        const values = e.detail.value
+
+        var items = this.data.else.items
+        // console.log(items[0])
+        var values = e.detail.value
         for (let i = 0, lenI = items.length; i < lenI; ++i) {
           items[i].checked = false
     
-          for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
+        for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
             if (items[i].value === values[j]) {
               items[i].checked = true
               break
