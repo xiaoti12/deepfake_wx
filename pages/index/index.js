@@ -308,6 +308,7 @@ Page({
                     this.setData({
                         imgL:res.data.data
                     })
+                this.transImage()
             }
         })
     },
@@ -370,11 +371,31 @@ Page({
                 ['config.hstyle.show']:false,
             })
         }
+        var config = this.data.config
+        var configKey=this.data.configKey
+        var key
+        var cvalue
+        // console.log(items[0])
+        var values = e.detail.value
+        for (key in configKey)
+        {
+            key=configKey[key]
+            for(cvalue in config[key].items)
+            {
+                cvalue=config[key].items[cvalue]
+                if (cvalue.value==values)
+                    cvalue.checked=true
+                    this.setData({
+                        cvalue
+                    })
+                
+            }
+        }
       },
     checkboxChange(e) {
         console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-
         var items = this.data.else.items
+
         // console.log(items[0])
         var values = e.detail.value
         for (let i = 0, lenI = items.length; i < lenI; ++i) {
