@@ -28,15 +28,15 @@ Page({
         },
         {
             value: 'adv',
-            name: '处理后',
+            name: '安全\n图像',
         },
         {
             value: 'deepfake',
-            name: 'fake',
+            name: 'Fake',
         },
         {
             value: 'adv_fake',
-            name: '处理后fake',
+            name: 'Fake\n扰乱',
         },
         ],
         else:{
@@ -60,7 +60,7 @@ Page({
                     show:true,
                     items:[
                         {name:'有头发',value:'YES'},
-                        {name:'没有头发',value:'NO',checked: 'true'},
+                        {name:'没有头发',value:'NO',checked:'true'},
                     ]
                 },
                 beard:{
@@ -117,7 +117,7 @@ Page({
             success: res => {
                 if (res.authSetting['scope.userInfo']) {
                     // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                    wx.getUserInfo({
+                    wx.getUserProfile({
                         success: res => {
                             // 可以将 res 发送给后台解码出 unionId
                             this.setData({
@@ -375,6 +375,7 @@ Page({
         var configKey=this.data.configKey
         var key
         var cvalue
+        var each
         // console.log(items[0])
         var values = e.detail.value
         for (key in configKey)
@@ -384,11 +385,21 @@ Page({
             {
                 cvalue=config[key].items[cvalue]
                 if (cvalue.value==values)
+                {
+                    for(each in config[key].items)
+                    {
+                        each=config[key].items[each]
+                        each.checked=false
+                        this.setData({
+                            each
+                        }) 
+                    }
                     cvalue.checked=true
                     this.setData({
                         cvalue
-                    })
-                
+                    }) 
+                }
+                    
             }
         }
       },

@@ -13,15 +13,17 @@
     </view>
 
     <view class="btn-wrap" wx:if="{{!loading}}">
-        <view class="mode-item btn btn1" bindtap="choseImg"><text>选择图片</text></view>
-        <view class="mode-item btn btn2" bindtap="saveImg" hidden="{{!showImg}}"><text>保存图片</text></view>
-        <view class="mode-item btn btn3" bindtap="openModeConfig"><text>图片属性</text></view>
+        <view class="btn btn1" bindtap="choseImg"><text>选择图片</text></view>
+        <view class="btn btn2" bindtap="saveImg" hidden="{{!showImg}}"><text>保存图片</text></view>
+        <view class="btn btn3" bindtap="openModeConfig"><text>图片属性</text></view>
         <!-- <view class="mode-item btn btn1" bindtap="openIndex1">贴红旗</view> -->
     </view>
     
     <view class="mode-list">
         <block wx:for="{{mode}}" wx:key="{{item.name}}">
-            <view bindtap="choseMode" data-index="{{index}}" class="mode-item {{index == modeIndex ? 'mode-item-chosed' : ''}}" >{{item.name}}</view>
+            <view bindtap="choseMode" data-index="{{index}}" class="mode-item {{index == modeIndex ? 'mode-item-chosed' : ''}}" >
+                <text>{{item.name}}</text>
+            </view>
         </block>
     </view>
 <!--  选择属性 -->
@@ -46,14 +48,14 @@
                             show-value/> -->
                         <radio-group class="radio-group" bindchange="radioChange">
                             <view class="radiotext">
-                                <label class="radio" wx:for="{{config[item].items}}">
+                                <label class="radio {{item.checked==true?'active':''}}" wx:for="{{config[item].items}}">
                                     <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
                                 </label>
                             </view>
                         </radio-group>
                     </view>
                 </block>
-                {{else.name}}
+                <view class="elsename">{{else.name}}</view>
                 <checkbox-group bindchange="checkboxChange">
                 <view class='check'>
                     <label wx:for="{{else.items}}" wx:key="{{item.value}}">
