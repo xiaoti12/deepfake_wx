@@ -6,8 +6,9 @@
   </view> -->
 <navigator url="../mine/mine">
     <view class="userinfo">
-        <text class="word">Anti-fake，让您肆意分享生活，不再有所顾虑！</text>
         <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+        <image class="slogan" mode="aspectFit" src="cloud://cloud1-1gsixq0o25238361.636c-cloud1-1gsixq0o25238361-1305525063/slogan.png"></image>
+        <!-- <text class="word">让您肆意分享生活，不再有所顾虑！</text> -->
         <!-- <open-data type="userNickName" class="userinfo-nickname"></open-data> -->
     </view>
 </navigator>

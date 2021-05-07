@@ -26,7 +26,7 @@ Page({
       },
     data: {
         img: '',
-        showImg: 'cloud://cloud1-1gsixq0o25238361.636c-cloud1-1gsixq0o25238361-1305525063/logo.png',
+        showImg: 'cloud://cloud1-1gsixq0o25238361.636c-cloud1-1gsixq0o25238361-1305525063/logo_transp.png',
         imgInfo: {},
         id:'',
         loading: false,

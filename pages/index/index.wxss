@@ -18,6 +18,7 @@ page{
 .img{
     width: 100%;
 }
+
 .my-canvas{
     position: fixed;
     left: -3000px;
@@ -26,6 +27,8 @@ page{
 .img-cont{
     width: 750rpx;
     font-size: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-wrap{
@@ -83,7 +86,7 @@ page{
 	color:#595959;
     width: 120rpx;
     height: 80rpx;
-    margin-top: 15rpx;
+    margin-top: 30rpx;
     line-height: 96%;
 	/* text-decoration:none; */
     display: flex;
@@ -102,7 +105,7 @@ page{
 }
 
 .btn{
-    box-shadow: 0px 10px 14px -7px #276873;
+    box-shadow: 0px 10px 14px -7px #949494;
 	border-radius:20px;
 	cursor:pointer;
 	color:#ffffff;
@@ -266,19 +269,25 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   }
   .userinfo {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-top: 0rpx;
   }
   .userinfo-avatar {
-    width: 100rpx;
-    height: 100rpx;
+    width: 75rpx;
+    height: 75rpx;
     border-radius: 50%;
     overflow: hidden;
-    margin: 0rpx auto;
+    margin-top: 20rpx; 
+    margin-left: 40rpx;
+    /* left: 10rpx; */
     justify-content: center;
   }
   
+  .slogan{
+      height: 75rpx;
+      margin-right: 40rpx;
+  }
   .userinfo-nickname {
     color: #347fd4;
   }
