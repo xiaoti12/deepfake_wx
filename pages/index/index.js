@@ -6,9 +6,27 @@ const app = getApp();
 let ctx;
 
 Page({
+    onShow() {
+        var userInfo = app.globalData.userInfo;
+        console.log("userInfo:" + userInfo);
+        if (userInfo && userInfo.mobile) {
+          this.setData({
+            userInfo: userInfo
+          });
+        } else {
+          wx.showToast({
+            icon: "none",
+            title: "请登录帐号",
+            duration: 1000
+          });
+          this.setData({
+            isShowAuth: true
+          });
+        }
+      },
     data: {
         img: '',
-        showImg: '',
+        showImg: 'cloud://cloud1-1gsixq0o25238361.636c-cloud1-1gsixq0o25238361-1305525063/logo.png',
         imgInfo: {},
         id:'',
         loading: false,
@@ -117,7 +135,7 @@ Page({
             success: res => {
                 if (res.authSetting['scope.userInfo']) {
                     // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                    wx.getUserProfile({
+                    wx.getUserInfo({
                         success: res => {
                             // 可以将 res 发送给后台解码出 unionId
                             this.setData({

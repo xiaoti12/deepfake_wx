@@ -4,7 +4,15 @@
        <open-data type="userAvatarUrl"></open-data>
     </view>
   </view> -->
+<navigator url="../mine/mine">
+    <view class="userinfo">
+        <text class="word">Anti-fake，让您肆意分享生活，不再有所顾虑！</text>
+        <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+        <!-- <open-data type="userNickName" class="userinfo-nickname"></open-data> -->
+    </view>
+</navigator>
 <view class="container">
+    
     <canvas class="my-canvas" style="width: 3000px; height: 2000px;" canvas-id="myCanvas"></canvas>
     
     <view class="img-cont">
@@ -14,7 +22,7 @@
 
     <view class="btn-wrap" wx:if="{{!loading}}">
         <view class="btn btn1" bindtap="choseImg"><text>选择图片</text></view>
-        <view class="btn btn2" bindtap="saveImg" hidden="{{!showImg}}"><text>保存图片</text></view>
+        <view class="btn btn2" bindtap="saveImg" hidden="{{!img}}"><text>保存图片</text></view>
         <view class="btn btn3" bindtap="openModeConfig"><text>图片属性</text></view>
         <!-- <view class="mode-item btn btn1" bindtap="openIndex1">贴红旗</view> -->
     </view>

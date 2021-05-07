@@ -32,7 +32,7 @@ page{
     width: 100%;
     position: fixed;
     left: 0;
-    bottom: 7%;
+    bottom: 3%;
     opacity: .8;
     display: flex;
     justify-content: center;
@@ -264,5 +264,25 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
     transform: translate(-50%, -50%) scale(1);
     -webkit-transform: translate(-50%, -50%) scale(1);
   }
-
-
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0rpx;
+  }
+  .userinfo-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0rpx auto;
+    justify-content: center;
+  }
+  
+  .userinfo-nickname {
+    color: #347fd4;
+  }
+  .word{
+      font-size: small;
+      font-family: cursive;
+  }

@@ -40,7 +40,7 @@
 		"minifyWXSS": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.2.3",
+	"libVersion": "2.14.3",
 	"appid": "wx37753f5a1a29775f",
 	"projectname": "photo",
 	"debugOptions": {

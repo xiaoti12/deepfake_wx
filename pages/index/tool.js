@@ -43,7 +43,7 @@ module.exports.tool = function (img, config, imgInfo,imgL){
     }
     if(imgL=='')
     {
-        return 'cloud://cloud1-1gsixq0o25238361.636c-cloud1-1gsixq0o25238361-1305525063/wn.png'//请等待
+        return 'cloud://cloud1-1gsixq0o25238361.636c-cloud1-1gsixq0o25238361-1305525063/u=1809196152,3795074716'//请等待
     }
     // imgL[0]=data.data[0]
     // imgL[1]=data.data[1]
