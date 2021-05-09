@@ -285,8 +285,9 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   }
   
   .slogan{
-      height: 75rpx;
-      margin-right: 40rpx;
+      height: 70rpx;
+      width: 600rpx;
+      margin: 20rpx 10rpx 0 20rpx;
   }
   .userinfo-nickname {
     color: #347fd4;

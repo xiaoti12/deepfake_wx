@@ -113,7 +113,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: "图片处理",
+      title: "臻相",
       path: "/pages/index/index"
     };
   }
